@@ -2,6 +2,8 @@
 
 ## UNRELEASED
 
+* switch to Webpack for building
+
 ## v0.9.15
 
 * update some dependencies
