@@ -29,6 +29,12 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: 'hyperform.js.org',
+      entryOnly: true,
+    }),
+  ],
   optimization: {
     minimize: true,
     minimizer: [new UglifyJsPlugin({

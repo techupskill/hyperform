@@ -1,3 +1,4 @@
+/*! hyperform.js.org */
 window["hyperform"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

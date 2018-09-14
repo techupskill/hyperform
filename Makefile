@@ -17,11 +17,10 @@ dist/hyperform.amd.min.js \
 dist/hyperform.cjs.min.js \
 dist/hyperform.min.js: dist/%.min.js : dist/%.js
 
-dist/hyperform.js: src/hyperform.js src/*.js src/*/*.js
+dist/hyperform.js: src/hyperform.js src/*.js src/*/*.js webpack.config.js
 	@echo "* build $@"
 	@mkdir -p dist
 	@$(WEBPACK)
-	@sed -i '1s#^#$(BANNER)\n#' "$@"
 
 test: test-syntax test-unit test-functional
 .PHONY: test
