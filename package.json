@@ -33,7 +33,7 @@
     "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "ava": "^0.25.0",
+    "ava": "^1.0.0-beta.8",
     "babel-loader": "^8.0.2",
     "jsdom": "^9.10.0",
     "jshint": "^2.9.1",
@@ -70,7 +70,13 @@
     "files": [
       "test/unit/**/*.js"
     ],
-    "babel": "inherit",
+    "babel": {
+      "testOptions": {
+        "presets": [
+            ["@babel/preset-env"]
+        ]
+      }
+    },
     "concurrency": 5
   },
   "babel": {
