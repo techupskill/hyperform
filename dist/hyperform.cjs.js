@@ -1,5 +1,99 @@
 /*! hyperform.js.org */
-'use strict';
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./src/tools/trigger_event.js
 
 /* the following code is borrowed from the WebComponents project, licensed
  * under the BSD license. Source:
@@ -16,50 +110,50 @@ var workingDefaultPrevented = function () {
 }();
 
 if (!workingDefaultPrevented) {
-  (function () {
-    var origPreventDefault = window.Event.prototype.preventDefault;
-    window.Event.prototype.preventDefault = function () {
-      if (!this.cancelable) {
-        return;
-      }
+  var origPreventDefault = window.Event.prototype.preventDefault;
 
-      origPreventDefault.call(this);
+  window.Event.prototype.preventDefault = function () {
+    if (!this.cancelable) {
+      return;
+    }
 
-      Object.defineProperty(this, 'defaultPrevented', {
-        get: function get() {
-          return true;
-        },
-        configurable: true
-      });
-    };
-  })();
+    origPreventDefault.call(this);
+    Object.defineProperty(this, 'defaultPrevented', {
+      get: function get() {
+        return true;
+      },
+      configurable: true
+    });
+  };
 }
 /* end of borrowed code */
 
-function create_event(name) {
-  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  var _ref$bubbles = _ref.bubbles;
-  var bubbles = _ref$bubbles === undefined ? true : _ref$bubbles;
-  var _ref$cancelable = _ref.cancelable;
-  var cancelable = _ref$cancelable === undefined ? false : _ref$cancelable;
+function create_event(name) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$bubbles = _ref.bubbles,
+      bubbles = _ref$bubbles === void 0 ? true : _ref$bubbles,
+      _ref$cancelable = _ref.cancelable,
+      cancelable = _ref$cancelable === void 0 ? false : _ref$cancelable;
 
   var event = document.createEvent('Event');
   event.initEvent(name, bubbles, cancelable);
   return event;
 }
+/* harmony default export */ var trigger_event = (function (element, event) {
+  var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+      _ref2$bubbles = _ref2.bubbles,
+      bubbles = _ref2$bubbles === void 0 ? true : _ref2$bubbles,
+      _ref2$cancelable = _ref2.cancelable,
+      cancelable = _ref2$cancelable === void 0 ? false : _ref2$cancelable;
 
-function trigger_event (element, event) {
-  var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  var _ref2$bubbles = _ref2.bubbles;
-  var bubbles = _ref2$bubbles === undefined ? true : _ref2$bubbles;
-  var _ref2$cancelable = _ref2.cancelable;
-  var cancelable = _ref2$cancelable === undefined ? false : _ref2$cancelable;
   var payload = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
   if (!(event instanceof window.Event)) {
-    event = create_event(event, { bubbles: bubbles, cancelable: cancelable });
+    event = create_event(event, {
+      bubbles: bubbles,
+      cancelable: cancelable
+    });
   }
 
   for (var key in payload) {
@@ -69,18 +163,18 @@ function trigger_event (element, event) {
   }
 
   element.dispatchEvent(event);
-
   return event;
-}
+});
+// CONCATENATED MODULE: ./src/tools/matches.js
 
 /* shim layer for the Element.matches method */
 
 var ep = window.Element.prototype;
 var native_matches = ep.matches || ep.matchesSelector || ep.msMatchesSelector || ep.webkitMatchesSelector;
-
-function matches (element, selector) {
-                       return native_matches.call(element, selector);
-}
+/* harmony default export */ var matches = (function (element, selector) {
+  return native_matches.call(element, selector);
+});
+// CONCATENATED MODULE: ./src/tools/mark.js
 
 /**
  * mark an object with a '__hyperform=true' property
@@ -90,8 +184,10 @@ function matches (element, selector) {
  * js> assert(obj.__hyperform === true)
  */
 
-function mark (obj) {
-  if (['object', 'function'].indexOf(typeof obj) > -1) {
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/* harmony default export */ var mark = (function (obj) {
+  if (['object', 'function'].indexOf(_typeof(obj)) > -1) {
     delete obj.__hyperform;
     Object.defineProperty(obj, '__hyperform', {
       configurable: true,
@@ -101,26 +197,35 @@ function mark (obj) {
   }
 
   return obj;
-}
+});
+// CONCATENATED MODULE: ./src/components/message_store.js
+
+
+
 
 /**
  * the internal storage for messages
  */
-var store = new WeakMap();
 
-/* jshint -W053 */ /* allow new String() */
+var store = new WeakMap();
+/* jshint -W053 */
+
+/* allow new String() */
+
 /**
  * handle validation messages
  *
  * Falls back to browser-native errors, if any are available. The messages
  * are String objects so that we can mark() them.
  */
+
 var message_store = {
   set: function set(element, message) {
     var is_custom = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     if (element instanceof window.HTMLFieldSetElement) {
       var wrapped_form = get_wrapper(element);
+
       if (wrapped_form && !wrapped_form.settings.extendFieldset) {
         /* make this a no-op for <fieldset> in strict mode */
         return message_store;
@@ -130,13 +235,15 @@ var message_store = {
     if (typeof message === 'string') {
       message = new String(message);
     }
+
     if (is_custom) {
       message.is_custom = true;
     }
+
     mark(message);
     store.set(element, message);
-
     /* allow the :invalid selector to match */
+
     if ('_original_setCustomValidity' in element) {
       element._original_setCustomValidity(message.toString());
     }
@@ -145,20 +252,27 @@ var message_store = {
   },
   get: function get(element) {
     var message = store.get(element);
+
     if (message === undefined && '_original_validationMessage' in element) {
       /* get the browser's validation message, if we have none. Maybe it
        * knows more than we. */
       message = new String(element._original_validationMessage);
     }
+
     return message ? message : new String('');
   },
   delete: function _delete(element) {
     if ('_original_setCustomValidity' in element) {
       element._original_setCustomValidity('');
     }
+
     return store.delete(element);
   }
 };
+/* jshint +W053 */
+
+
+// CONCATENATED MODULE: ./src/tools/generate_id.js
 
 /**
  * counter that will be incremented with every call
@@ -168,17 +282,17 @@ var message_store = {
  */
 
 var uid = 0;
-
 /**
  * generate a random ID
  *
  * @see https://gist.github.com/gordonbrander/2230317
  */
-function generate_id () {
-  var prefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'hf_';
 
+/* harmony default export */ var generate_id = (function () {
+  var prefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'hf_';
   return prefix + uid++ + Math.random().toString(36).substr(2);
-}
+});
+// CONCATENATED MODULE: ./src/tools/get_radiogroup.js
 
 /**
  * get all radio buttons (including `element`) that belong to element's
@@ -191,13 +305,18 @@ function get_radiogroup(element) {
       return radio.type === 'radio' && radio.name === element.name;
     });
   }
+
   return [element];
 }
+// CONCATENATED MODULE: ./src/components/renderer.js
+
+
+
+
+
 
 var warningsCache = new WeakMap();
-
 var DefaultRenderer = {
-
   /**
    * called when a warning should become visible
    */
@@ -247,28 +366,27 @@ var DefaultRenderer = {
       }
 
       element.setAttribute('aria-errormessage', warning.id);
+
       if (!element.hasAttribute('aria-describedby')) {
         element.setAttribute('aria-describedby', warning.id);
       }
+
       warning.textContent = msg;
       Renderer.attachWarning(warning, element);
     } else if (warning && warning.parentNode) {
       if (element.getAttribute('aria-describedby') === warning.id) {
         element.removeAttribute('aria-describedby');
       }
+
       element.removeAttribute('aria-errormessage');
       Renderer.detachWarning(warning, element);
     }
   }
-
 };
-
 var Renderer = {
-
   attachWarning: DefaultRenderer.attachWarning,
   detachWarning: DefaultRenderer.detachWarning,
   showWarning: DefaultRenderer.showWarning,
-
   set: function set(renderer, action) {
     if (renderer.indexOf('_') > -1) {
       /* global console */
@@ -278,16 +396,19 @@ var Renderer = {
         return g[1].toUpperCase();
       });
     }
+
     if (!action) {
       action = DefaultRenderer[renderer];
     }
+
     Renderer[renderer] = action;
   }
-
 };
+/* harmony default export */ var components_renderer = (Renderer);
+// CONCATENATED MODULE: ./src/components/hooks.js
+
 
 var registry = Object.create(null);
-
 /**
  * run all actions registered for a hook
  *
@@ -296,13 +417,13 @@ var registry = Object.create(null);
  *
  * @return mixed the returned value of the action calls or undefined
  */
+
 function call_hook(hook) {
   var result;
   var call_args = Array.prototype.slice.call(arguments, 1);
 
   if (hook in registry) {
     result = registry[hook].reduce(function (args) {
-
       return function (previousResult, currentAction) {
         var interimResult = currentAction.apply({
           state: previousResult,
@@ -315,13 +436,13 @@ function call_hook(hook) {
 
   return result;
 }
-
 /**
  * Filter a value through hooked functions
  *
  * Allows for additional parameters:
  * js> do_filter('foo', null, current_element)
  */
+
 function do_filter(hook, initial_value) {
   var result = initial_value;
   var call_args = Array.prototype.slice.call(arguments, 1);
@@ -339,10 +460,10 @@ function do_filter(hook, initial_value) {
 
   return result;
 }
-
 /**
  * remove an action again
  */
+
 function remove_hook(hook, action) {
   if (hook in registry) {
     for (var i = 0; i < registry[hook].length; i++) {
@@ -353,53 +474,61 @@ function remove_hook(hook, action) {
     }
   }
 }
+
 /**
  * add an action to a hook
  */
+
 function add_hook(hook, action, position) {
   if (!(hook in registry)) {
     registry[hook] = [];
   }
+
   if (position === undefined) {
     position = registry[hook].length;
   }
+
   registry[hook].splice(position, 0, action);
 }
+
+// CONCATENATED MODULE: ./src/components/types.js
 
 /* and datetime-local? Spec says “Nah!” */
 
 var dates = ['datetime', 'date', 'month', 'week', 'time'];
-
 var plain_numbers = ['number', 'range'];
-
 /* everything that returns something meaningful for valueAsNumber and
  * can have the step attribute */
-var numbers = dates.concat(plain_numbers, 'datetime-local');
 
+var numbers = dates.concat(plain_numbers, 'datetime-local');
 /* the spec says to only check those for syntax in validity.typeMismatch.
  * ¯\_(ツ)_/¯ */
+
 var type_checked = ['email', 'url'];
-
 /* check these for validity.badInput */
+
 var input_checked = ['email', 'date', 'month', 'week', 'time', 'datetime', 'datetime-local', 'number', 'range', 'color'];
-
-var text_types = ['text', 'search', 'tel', 'password'].concat(type_checked);
-
+var types_text = ['text', 'search', 'tel', 'password'].concat(type_checked);
 /* input element types, that are candidates for the validation API.
  * Missing from this set are: button, hidden, menu (from <button>), reset and
  * the types for non-<input> elements. */
-var validation_candidates = ['checkbox', 'color', 'file', 'image', 'radio', 'submit'].concat(numbers, text_types);
 
+var validation_candidates = ['checkbox', 'color', 'file', 'image', 'radio', 'submit'].concat(numbers, types_text);
 /* all known types of <input> */
-var inputs = ['button', 'hidden', 'reset'].concat(validation_candidates);
 
+var inputs = ['button', 'hidden', 'reset'].concat(validation_candidates);
 /* apparently <select> and <textarea> have types of their own */
+
 var non_inputs = ['select-one', 'select-multiple', 'textarea'];
+// CONCATENATED MODULE: ./src/tools/get_type.js
+
+
 
 /**
  * get the element's type in a backwards-compatible way
  */
-function get_type (element) {
+
+/* harmony default export */ var get_type = (function (element) {
   if (element instanceof window.HTMLTextAreaElement) {
     return 'textarea';
   } else if (element instanceof window.HTMLSelectElement) {
@@ -408,6 +537,7 @@ function get_type (element) {
     return (element.getAttribute('type') || 'submit').toLowerCase();
   } else if (element instanceof window.HTMLInputElement) {
     var attr = (element.getAttribute('type') || '').toLowerCase();
+
     if (attr && inputs.indexOf(attr) > -1) {
       return attr;
     } else {
@@ -418,15 +548,23 @@ function get_type (element) {
   }
 
   return '';
-}
+});
+// CONCATENATED MODULE: ./src/tools/is_validation_candidate.js
+
+
+
+
+
 
 /**
  * check if an element should be ignored due to any of its parents
  *
  * Checks <fieldset disabled> and <datalist>.
  */
+
 function is_in_disallowed_parent(element) {
   var p = element.parentNode;
+
   while (p && p.nodeType === 1) {
     if (p instanceof window.HTMLFieldSetElement && p.hasAttribute('disabled')) {
       /* quick return, if it's a child of a disabled fieldset */
@@ -442,34 +580,36 @@ function is_in_disallowed_parent(element) {
       /* the outer boundary. We can stop looking for relevant elements. */
       break;
     }
+
     p = p.parentNode;
   }
+
   return false;
 }
-
 /**
  * check if an element is a candidate for constraint validation
  *
  * @see https://html.spec.whatwg.org/multipage/forms.html#barred-from-constraint-validation
  */
-function is_validation_candidate (element) {
 
+
+/* harmony default export */ var is_validation_candidate = (function (element) {
   /* allow a shortcut via filters, e.g. to validate type=hidden fields */
   var filtered = do_filter('is_validation_candidate', null, element);
+
   if (filtered !== null) {
     return !!filtered;
   }
-
   /* it must be any of those elements */
-  if (element instanceof window.HTMLSelectElement || element instanceof window.HTMLTextAreaElement || element instanceof window.HTMLButtonElement || element instanceof window.HTMLInputElement) {
 
+
+  if (element instanceof window.HTMLSelectElement || element instanceof window.HTMLTextAreaElement || element instanceof window.HTMLButtonElement || element instanceof window.HTMLInputElement) {
     var type = get_type(element);
     /* its type must be in the whitelist */
-    if (non_inputs.indexOf(type) > -1 || validation_candidates.indexOf(type) > -1) {
 
+    if (non_inputs.indexOf(type) > -1 || validation_candidates.indexOf(type) > -1) {
       /* it mustn't be disabled or readonly */
       if (!element.hasAttribute('disabled') && !element.hasAttribute('readonly')) {
-
         var wrapped_form = get_wrapper(element);
 
         if (
@@ -477,10 +617,8 @@ function is_validation_candidate (element) {
         wrapped_form && !wrapped_form.settings.novalidateOnElements ||
         /* ...or it doesn't have such an attribute/property */
         !element.hasAttribute('novalidate') && !element.noValidate) {
-
           /* it isn't part of a <fieldset disabled> */
           if (!is_in_disallowed_parent(element)) {
-
             /* then it's a candidate */
             return true;
           }
@@ -488,19 +626,24 @@ function is_validation_candidate (element) {
       }
     }
   }
-
   /* this is no HTML5 validation candidate... */
-  return false;
-}
 
-function format_date (date) {
+
+  return false;
+});
+// CONCATENATED MODULE: ./src/tools/format_date.js
+
+
+/* harmony default export */ var format_date = (function (date) {
   var part = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
 
   switch (part) {
     case 'date':
       return (date.toLocaleDateString || date.toDateString).call(date);
+
     case 'time':
       return (date.toLocaleTimeString || date.toTimeString).call(date);
+
     case 'month':
       return 'toLocaleDateString' in date ? date.toLocaleDateString(undefined, {
         year: 'numeric',
@@ -508,27 +651,31 @@ function format_date (date) {
       }) : date.toDateString();
     // case 'week':
     // TODO
+
     default:
       return (date.toLocaleString || date.toString).call(date);
   }
-}
+});
+// CONCATENATED MODULE: ./src/tools/sprintf.js
 
-function sprintf (str) {
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+
+/* harmony default export */ var sprintf = (function (str) {
+  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
 
   var args_length = args.length;
   var global_index = 0;
-
   return str.replace(/%([0-9]+\$)?([sl])/g, function (match, position, type) {
     var local_index = global_index;
+
     if (position) {
       local_index = Number(position.replace(/\$$/, '')) - 1;
     }
-    global_index += 1;
 
+    global_index += 1;
     var arg = '';
+
     if (args_length > local_index) {
       arg = args[local_index];
     }
@@ -545,7 +692,8 @@ function sprintf (str) {
 
     return arg;
   });
-}
+});
+// CONCATENATED MODULE: ./src/tools/get_week_of_year.js
 
 /* For a given date, get the ISO week number
  *
@@ -566,34 +714,45 @@ function sprintf (str) {
  *      2012/1/1   is Sunday in week 52 of 2011
  */
 
-function get_week_of_year (d) {
+/* harmony default export */ var get_week_of_year = (function (d) {
   /* Copy date so don't modify original */
   d = new Date(+d);
   d.setUTCHours(0, 0, 0);
   /* Set to nearest Thursday: current date + 4 - current day number
    * Make Sunday's day number 7 */
+
   d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
   /* Get first day of year */
+
   var yearStart = new Date(d.getUTCFullYear(), 0, 1);
   /* Calculate full weeks to nearest Thursday */
+
   var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
   /* Return array of year and week number */
+
   return [d.getUTCFullYear(), weekNo];
-}
+});
+// CONCATENATED MODULE: ./src/tools/date_to_string.js
+
+
+
+
 
 function pad(num) {
   var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-
   var s = num + '';
+
   while (s.length < size) {
     s = '0' + s;
   }
+
   return s;
 }
-
 /**
  * calculate a string from a date according to HTML5
  */
+
+
 function date_to_string(date, element_type) {
   if (!(date instanceof Date)) {
     return null;
@@ -622,6 +781,7 @@ function date_to_string(date, element_type) {
 
   return null;
 }
+// CONCATENATED MODULE: ./src/tools/get_date_from_week.js
 
 /**
  * return a new Date() representing the ISO date for a week number
@@ -629,33 +789,43 @@ function date_to_string(date, element_type) {
  * @see http://stackoverflow.com/a/16591175/113195
  */
 
-function get_date_from_week (week, year) {
+/* harmony default export */ var get_date_from_week = (function (week, year) {
   var date = new Date(Date.UTC(year, 0, 1 + (week - 1) * 7));
 
-  if (date.getUTCDay() <= 4 /* thursday */) {
+  if (date.getUTCDay() <= 4
+  /* thursday */
+  ) {
       date.setUTCDate(date.getUTCDate() - date.getUTCDay() + 1);
     } else {
     date.setUTCDate(date.getUTCDate() + 8 - date.getUTCDay());
   }
 
   return date;
-}
+});
+// CONCATENATED MODULE: ./src/tools/string_to_date.js
+
+
 
 /**
  * calculate a date from a string according to HTML5
  */
-function string_to_date (string, element_type) {
+
+/* harmony default export */ var string_to_date = (function (string, element_type) {
   var date = new Date(0);
   var ms;
+
   switch (element_type) {
     case 'datetime':
       if (!/^([0-9]{4,})-([0-9]{2})-([0-9]{2})T([01][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9])(?:\.([0-9]{1,3}))?)?$/.test(string)) {
         return null;
       }
+
       ms = RegExp.$7 || '000';
+
       while (ms.length < 3) {
         ms += '0';
       }
+
       date.setUTCFullYear(Number(RegExp.$1));
       date.setUTCMonth(Number(RegExp.$2) - 1, Number(RegExp.$3));
       date.setUTCHours(Number(RegExp.$4), Number(RegExp.$5), Number(RegExp.$6 || 0), Number(ms));
@@ -665,6 +835,7 @@ function string_to_date (string, element_type) {
       if (!/^([0-9]{4,})-([0-9]{2})-([0-9]{2})$/.test(string)) {
         return null;
       }
+
       date.setUTCFullYear(Number(RegExp.$1));
       date.setUTCMonth(Number(RegExp.$2) - 1, Number(RegExp.$3));
       return date;
@@ -673,6 +844,7 @@ function string_to_date (string, element_type) {
       if (!/^([0-9]{4,})-([0-9]{2})$/.test(string)) {
         return null;
       }
+
       date.setUTCFullYear(Number(RegExp.$1));
       date.setUTCMonth(Number(RegExp.$2) - 1, 1);
       return date;
@@ -681,34 +853,46 @@ function string_to_date (string, element_type) {
       if (!/^([0-9]{4,})-W(0[1-9]|[1234][0-9]|5[0-3])$/.test(string)) {
         return null;
       }
+
       return get_date_from_week(Number(RegExp.$2), Number(RegExp.$1));
 
     case 'time':
       if (!/^([01][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9])(?:\.([0-9]{1,3}))?)?$/.test(string)) {
         return null;
       }
+
       ms = RegExp.$4 || '000';
+
       while (ms.length < 3) {
         ms += '0';
       }
+
       date.setUTCHours(Number(RegExp.$1), Number(RegExp.$2), Number(RegExp.$3 || 0), Number(ms));
       return date;
   }
 
   return null;
-}
+});
+// CONCATENATED MODULE: ./src/tools/string_to_number.js
+
+
 
 /**
  * calculate a date from a string according to HTML5
  */
-function string_to_number (string, element_type) {
+
+/* harmony default export */ var string_to_number = (function (string, element_type) {
   var rval = string_to_date(string, element_type);
+
   if (rval !== null) {
     return +rval;
   }
   /* not parseFloat, because we want NaN for invalid values like "1.2xxy" */
+
+
   return Number(string);
-}
+});
+// CONCATENATED MODULE: ./src/components/localization.js
 
 /**
  * the following validation messages are from Firefox source,
@@ -716,7 +900,7 @@ function string_to_number (string, element_type) {
  * released under MPL license, http://mozilla.org/MPL/2.0/.
  */
 
-var catalog = {
+var localization_catalog = {
   en: {
     TextTooLong: 'Please shorten this text to %l characters or less (you are currently using %l characters).',
     ValueMissing: 'Please fill out this field.',
@@ -739,62 +923,65 @@ var catalog = {
     BadInputNumber: 'Please enter a number.'
   }
 };
-
 /**
  * the global language Hyperform will use
  */
-var language = 'en';
 
+var language = 'en';
 /**
  * the base language according to BCP47, i.e., only the piece before the first hyphen
  */
-var base_lang = 'en';
 
+var base_lang = 'en';
 /**
  * set the language for Hyperform’s messages
  */
+
 function set_language(newlang) {
   language = newlang;
   base_lang = newlang.replace(/[-_].*/, '');
 }
-
 /**
  * add a lookup catalog "string: translation" for a language
  */
+
 function add_translation(lang, new_catalog) {
-  if (!(lang in catalog)) {
-    catalog[lang] = {};
+  if (!(lang in localization_catalog)) {
+    localization_catalog[lang] = {};
   }
+
   for (var key in new_catalog) {
     if (new_catalog.hasOwnProperty(key)) {
-      catalog[lang][key] = new_catalog[key];
+      localization_catalog[lang][key] = new_catalog[key];
     }
   }
 }
-
 /**
  * return `s` translated into the current language
  *
  * Defaults to the base language and then English if the former has no
  * translation for `s`.
  */
-function _ (s) {
-  if (language in catalog && s in catalog[language]) {
-    return catalog[language][s];
-  } else if (base_lang in catalog && s in catalog[base_lang]) {
-    return catalog[base_lang][s];
-  } else if (s in catalog.en) {
-    return catalog.en[s];
+
+/* harmony default export */ var localization = (function (s) {
+  if (language in localization_catalog && s in localization_catalog[language]) {
+    return localization_catalog[language][s];
+  } else if (base_lang in localization_catalog && s in localization_catalog[base_lang]) {
+    return localization_catalog[base_lang][s];
+  } else if (s in localization_catalog.en) {
+    return localization_catalog.en[s];
   }
+
   return s;
-}
+});
+// CONCATENATED MODULE: ./src/components/step_defaults.js
+
 
 var default_step = {
   'datetime-local': 60,
   datetime: 60,
   time: 60
 };
-
 var step_scale_factor = {
   'datetime-local': 1000,
   datetime: 1000,
@@ -802,31 +989,37 @@ var step_scale_factor = {
   week: 604800000,
   time: 1000
 };
-
 var default_step_base = {
   week: -259200000
 };
-
 var default_min = {
   range: 0
 };
-
 var default_max = {
   range: 100
 };
+// CONCATENATED MODULE: ./src/tools/get_next_valid.js
+
+
+
+
+
+
+
 
 /**
  * get previous and next valid values for a stepped input element
  */
-function get_next_valid (element) {
+
+/* harmony default export */ var get_next_valid = (function (element) {
   var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-
   var type = get_type(element);
-
   var aMin = element.getAttribute('min');
   var min = default_min[type] || NaN;
+
   if (aMin) {
     var pMin = string_to_number(aMin, type);
+
     if (!isNaN(pMin)) {
       min = pMin;
     }
@@ -834,8 +1027,10 @@ function get_next_valid (element) {
 
   var aMax = element.getAttribute('max');
   var max = default_max[type] || NaN;
+
   if (aMax) {
     var pMax = string_to_number(aMax, type);
+
     if (!isNaN(pMax)) {
       max = pMax;
     }
@@ -843,29 +1038,28 @@ function get_next_valid (element) {
 
   var aStep = element.getAttribute('step');
   var step = default_step[type] || 1;
+
   if (aStep && aStep.toLowerCase() === 'any') {
     /* quick return: we cannot calculate prev and next */
-    return [_('any value'), _('any value')];
+    return [localization('any value'), localization('any value')];
   } else if (aStep) {
     var pStep = string_to_number(aStep, type);
+
     if (!isNaN(pStep)) {
       step = pStep;
     }
   }
 
   var default_value = string_to_number(element.getAttribute('value'), type);
-
   var value = string_to_number(element.value || element.getAttribute('value'), type);
 
   if (isNaN(value)) {
     /* quick return: we cannot calculate without a solid base */
-    return [_('any valid value'), _('any valid value')];
+    return [localization('any valid value'), localization('any valid value')];
   }
 
   var step_base = !isNaN(min) ? min : !isNaN(default_value) ? default_value : default_step_base[type] || 0;
-
   var scale = step_scale_factor[type] || 1;
-
   var prev = step_base + Math.floor((value - step_base) / (step * scale)) * (step * scale) * n;
   var next = step_base + (Math.floor((value - step_base) / (step * scale)) + 1) * (step * scale) * n;
 
@@ -880,15 +1074,17 @@ function get_next_valid (element) {
   } else if (next < min) {
     next = min;
   }
-
   /* convert to date objects, if appropriate */
+
+
   if (dates.indexOf(type) > -1) {
     prev = date_to_string(new Date(prev), type);
     next = date_to_string(new Date(next), type);
   }
 
   return [prev, next];
-}
+});
+// CONCATENATED MODULE: ./src/tools/unicode_string_length.js
 
 /**
  * patch String.length to account for non-BMP characters
@@ -898,32 +1094,35 @@ function get_next_valid (element) {
  * polyfills in older browsers.
  */
 
-function unicode_string_length (str) {
+/* harmony default export */ var unicode_string_length = (function (str) {
   return str.match(/[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/g).length;
-}
+});
+// CONCATENATED MODULE: ./src/components/custom_messages.js
 
 /**
  * internal storage for custom error messages
  */
 
-var store$1 = new WeakMap();
-
+var custom_messages_store = new WeakMap();
 /**
  * register custom error messages per element
  */
+
 var custom_messages = {
   set: function set(element, validator, message) {
-    var messages = store$1.get(element) || {};
+    var messages = custom_messages_store.get(element) || {};
     messages[validator] = message;
-    store$1.set(element, messages);
+    custom_messages_store.set(element, messages);
     return custom_messages;
   },
   get: function get(element, validator) {
     var _default = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
 
-    var messages = store$1.get(element);
+    var messages = custom_messages_store.get(element);
+
     if (messages === undefined || !(validator in messages)) {
       var data_id = 'data-' + validator.replace(/[A-Z]/g, '-$&').toLowerCase();
+
       if (element.hasAttribute(data_id)) {
         /* if the element has a data-validator attribute, use this as fallback.
          * E.g., if validator == 'valueMissing', the element can specify a
@@ -932,34 +1131,42 @@ var custom_messages = {
          */
         return element.getAttribute(data_id);
       }
+
       return _default;
     }
+
     return messages[validator];
   },
   delete: function _delete(element) {
     var validator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
     if (!validator) {
-      return store$1.delete(element);
+      return custom_messages_store.delete(element);
     }
-    var messages = store$1.get(element) || {};
+
+    var messages = custom_messages_store.get(element) || {};
+
     if (validator in messages) {
       delete messages[validator];
-      store$1.set(element, messages);
+      custom_messages_store.set(element, messages);
       return true;
     }
+
     return false;
   }
 };
+/* harmony default export */ var components_custom_messages = (custom_messages);
+// CONCATENATED MODULE: ./src/components/registry.js
+
 
 var internal_registry = new WeakMap();
-
 /**
  * A registry for custom validators
  *
  * slim wrapper around a WeakMap to ensure the values are arrays
  * (hence allowing > 1 validators per element)
  */
+
 var custom_validator_registry = {
   set: function set(element, validator) {
     var current = internal_registry.get(element) || [];
@@ -974,40 +1181,53 @@ var custom_validator_registry = {
     return internal_registry.delete(element);
   }
 };
+/* harmony default export */ var components_registry = (custom_validator_registry);
+// CONCATENATED MODULE: ./src/validators/bad_input.js
+
+
+
+
 
 /**
  * test whether the element suffers from bad input
  */
-function test_bad_input (element) {
+
+/* harmony default export */ var bad_input = (function (element) {
   var type = get_type(element);
 
   if (input_checked.indexOf(type) === -1) {
     /* we're not interested, thanks! */
     return true;
   }
-
   /* the browser hides some bad input from the DOM, e.g. malformed numbers,
    * email addresses with invalid punycode representation, ... We try to resort
    * to the original method here. The assumption is, that a browser hiding
    * bad input will hopefully also always support a proper
    * ValidityState.badInput */
+
+
   if (!element.value) {
     if ('_original_validity' in element && !element._original_validity.__hyperform) {
       return !element._original_validity.badInput;
     }
     /* no value and no original badInput: Assume all's right. */
+
+
     return true;
   }
 
   var result = true;
+
   switch (type) {
     case 'color':
       result = /^#[a-f0-9]{6}$/.test(element.value);
       break;
+
     case 'number':
     case 'range':
       result = !isNaN(Number(element.value));
       break;
+
     case 'datetime':
     case 'date':
     case 'month':
@@ -1015,20 +1235,28 @@ function test_bad_input (element) {
     case 'time':
       result = string_to_date(element.value, type) !== null;
       break;
+
     case 'datetime-local':
       result = /^([0-9]{4,})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9])(?:\.([0-9]{1,3}))?)?$/.test(element.value);
       break;
+
     case 'tel':
       /* spec says No! Phone numbers can have all kinds of formats, so this
        * is expected to be a free-text field. */
       // TODO we could allow a setting 'phone_regex' to be evaluated here.
       break;
+
     case 'email':
       break;
   }
 
   return result;
-}
+});
+// CONCATENATED MODULE: ./src/validators/max.js
+
+
+
+
 
 /**
  * test the max attribute
@@ -1036,7 +1264,8 @@ function test_bad_input (element) {
  * we use Number() instead of parseFloat(), because an invalid attribute
  * value like "123abc" should result in an error.
  */
-function test_max (element) {
+
+/* harmony default export */ var validators_max = (function (element) {
   var type = get_type(element);
 
   if (!element.value || !element.hasAttribute('max')) {
@@ -1044,8 +1273,8 @@ function test_max (element) {
     return true;
   }
 
-  var value = void 0,
-      max = void 0;
+  var value, max;
+
   if (dates.indexOf(type) > -1) {
     value = 1 * string_to_date(element.value, type);
     max = 1 * (string_to_date(element.getAttribute('max'), type) || NaN);
@@ -1055,28 +1284,39 @@ function test_max (element) {
   }
 
   return isNaN(max) || value <= max;
-}
+});
+// CONCATENATED MODULE: ./src/validators/maxlength.js
+
+
+
+
 
 /**
  * test the maxlength attribute
  */
-function test_maxlength (element) {
-  if (!element.value || text_types.indexOf(get_type(element)) === -1 || !element.hasAttribute('maxlength') || !element.getAttribute('maxlength') // catch maxlength=""
+
+/* harmony default export */ var validators_maxlength = (function (element) {
+  if (!element.value || types_text.indexOf(get_type(element)) === -1 || !element.hasAttribute('maxlength') || !element.getAttribute('maxlength') // catch maxlength=""
   ) {
       return true;
     }
 
   var maxlength = parseInt(element.getAttribute('maxlength'), 10);
-
   /* check, if the maxlength value is usable at all.
    * We allow maxlength === 0 to basically disable input (Firefox does, too).
    */
+
   if (isNaN(maxlength) || maxlength < 0) {
     return true;
   }
 
   return unicode_string_length(element.value) <= maxlength;
-}
+});
+// CONCATENATED MODULE: ./src/validators/min.js
+
+
+
+
 
 /**
  * test the min attribute
@@ -1084,7 +1324,8 @@ function test_maxlength (element) {
  * we use Number() instead of parseFloat(), because an invalid attribute
  * value like "123abc" should result in an error.
  */
-function test_min (element) {
+
+/* harmony default export */ var validators_min = (function (element) {
   var type = get_type(element);
 
   if (!element.value || !element.hasAttribute('min')) {
@@ -1092,8 +1333,8 @@ function test_min (element) {
     return true;
   }
 
-  var value = void 0,
-      min = void 0;
+  var value, min;
+
   if (dates.indexOf(type) > -1) {
     value = 1 * string_to_date(element.value, type);
     min = 1 * (string_to_date(element.getAttribute('min'), type) || NaN);
@@ -1103,39 +1344,50 @@ function test_min (element) {
   }
 
   return isNaN(min) || value >= min;
-}
+});
+// CONCATENATED MODULE: ./src/validators/minlength.js
+
+
+
+
 
 /**
  * test the minlength attribute
  */
-function test_minlength (element) {
-  if (!element.value || text_types.indexOf(get_type(element)) === -1 || !element.hasAttribute('minlength') || !element.getAttribute('minlength') // catch minlength=""
+
+/* harmony default export */ var validators_minlength = (function (element) {
+  if (!element.value || types_text.indexOf(get_type(element)) === -1 || !element.hasAttribute('minlength') || !element.getAttribute('minlength') // catch minlength=""
   ) {
       return true;
     }
 
   var minlength = parseInt(element.getAttribute('minlength'), 10);
-
   /* check, if the minlength value is usable at all. */
+
   if (isNaN(minlength) || minlength < 0) {
     return true;
   }
 
   return unicode_string_length(element.value) >= minlength;
-}
+});
+// CONCATENATED MODULE: ./src/validators/pattern.js
 
 /**
  * test the pattern attribute
  */
 
-function test_pattern (element) {
-    return !element.value || !element.hasAttribute('pattern') || new RegExp('^(?:' + element.getAttribute('pattern') + ')$').test(element.value);
-}
+/* harmony default export */ var validators_pattern = (function (element) {
+  return !element.value || !element.hasAttribute('pattern') || new RegExp('^(?:' + element.getAttribute('pattern') + ')$').test(element.value);
+});
+// CONCATENATED MODULE: ./src/validators/required.js
+
+
 
 /**
  * test the required attribute
  */
-function test_required (element) {
+
+/* harmony default export */ var required = (function (element) {
   if (element.type === 'radio') {
     /* the happy (and quick) path for radios: */
     if (element.hasAttribute('required') && element.checked) {
@@ -1143,9 +1395,9 @@ function test_required (element) {
     }
 
     var radiogroup = get_radiogroup(element);
-
     /* if any radio in the group is required, we need any (not necessarily the
      * same) radio to be checked */
+
     if (radiogroup.some(function (radio) {
       return radio.hasAttribute('required');
     })) {
@@ -1154,6 +1406,8 @@ function test_required (element) {
       });
     }
     /* not required, validation passes */
+
+
     return true;
   }
 
@@ -1163,12 +1417,19 @@ function test_required (element) {
   }
 
   return element.type === 'checkbox' ? element.checked : !!element.value;
-}
+});
+// CONCATENATED MODULE: ./src/validators/step.js
+
+
+
+
+
 
 /**
  * test the step attribute
  */
-function test_step (element) {
+
+/* harmony default export */ var validators_step = (function (element) {
   var type = get_type(element);
 
   if (!element.value || numbers.indexOf(type) === -1 || (element.getAttribute('step') || '').toLowerCase() === 'any') {
@@ -1178,6 +1439,7 @@ function test_step (element) {
   }
 
   var step = element.getAttribute('step');
+
   if (step) {
     step = string_to_number(step, type);
   } else {
@@ -1191,7 +1453,6 @@ function test_step (element) {
   }
 
   var scale = step_scale_factor[type] || 1;
-
   var value = string_to_number(element.value, type);
   var min = string_to_number(element.getAttribute('min') || element.getAttribute('value') || '', type);
 
@@ -1208,22 +1469,26 @@ function test_step (element) {
   }
 
   var result = Math.abs(min - value) % (step * scale);
-
   return result < 0.00000001 ||
   /* crappy floating-point arithmetics! */
   result > step * scale - 0.00000001;
-}
+});
+// CONCATENATED MODULE: ./src/tools/trim.js
+
 
 var ws_on_start_or_end = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-
 /**
  * trim a string of whitespace
  *
  * We don't use String.trim() to remove the need to polyfill it.
  */
-function trim (str) {
+
+/* harmony default export */ var trim = (function (str) {
   return str.replace(ws_on_start_or_end, '');
-}
+});
+// CONCATENATED MODULE: ./src/tools/comma_split.js
+
+
 
 /**
  * split a string on comma and trim the components
@@ -1232,27 +1497,35 @@ function trim (str) {
  * https://html.spec.whatwg.org/multipage/infrastructure.html#split-a-string-on-commas
  * plus removing empty entries.
  */
-function comma_split (str) {
+
+/* harmony default export */ var comma_split = (function (str) {
   return str.split(',').map(function (item) {
     return trim(item);
   }).filter(function (b) {
     return b;
   });
-}
+});
+// CONCATENATED MODULE: ./src/validators/type.js
+
+
+
+
+
 
 /* we use a dummy <a> where we set the href to test URL validity
  * The definition is out of the "global" scope so that JSDOM can be instantiated
  * after loading Hyperform for tests.
  */
+
 var url_canary;
-
 /* see https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address */
-var email_pattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
+var email_pattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 /**
  * test the type-inherent syntax
  */
-function test_type (element) {
+
+/* harmony default export */ var validators_type = (function (element) {
   var type = get_type(element);
 
   if (type !== 'file' && !element.value || type !== 'file' && type_checked.indexOf(type) === -1) {
@@ -1267,10 +1540,12 @@ function test_type (element) {
       if (!url_canary) {
         url_canary = document.createElement('a');
       }
+
       var value = trim(element.value);
       url_canary.href = value;
       is_valid = url_canary.href === value || url_canary.href === value + '/';
       break;
+
     case 'email':
       if (element.hasAttribute('multiple')) {
         is_valid = comma_split(element.value).every(function (value) {
@@ -1279,13 +1554,16 @@ function test_type (element) {
       } else {
         is_valid = email_pattern.test(trim(element.value));
       }
+
       break;
+
     case 'file':
       if ('files' in element && element.files.length && element.hasAttribute('accept')) {
         var patterns = comma_split(element.getAttribute('accept')).map(function (pattern) {
           if (/^(audio|video|image)\/\*$/.test(pattern)) {
             pattern = new RegExp('^' + RegExp.$1 + '/.+$');
           }
+
           return pattern;
         });
 
@@ -1300,7 +1578,6 @@ function test_type (element) {
           patternloop: for (var j = 0; j < patterns.length; j++) {
             var file = element.files[i];
             var pattern = patterns[j];
-
             var fileprop = file.type;
 
             if (typeof pattern === 'string' && pattern.substr(0, 1) === '.') {
@@ -1325,54 +1602,91 @@ function test_type (element) {
           }
         }
       }
+
   }
 
   return is_valid;
-}
+});
+// CONCATENATED MODULE: ./src/tools/validity_state_checkers.js
+
+/**
+ * Implement constraint checking functionality defined in the HTML5 standard
+ *
+ * @see https://html.spec.whatwg.org/multipage/forms.html#dom-cva-validity
+ * @return bool true if the test fails [!], false otherwise
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * boilerplate function for all tests but customError
  */
-function check$1(test, react) {
+
+function check(test, react) {
   return function (element) {
     var invalid = !test(element);
+
     if (invalid) {
       react(element);
     }
+
     return invalid;
   };
 }
-
 /**
  * create a common function to set error messages
  */
+
+
 function set_msg(element, msgtype, _default) {
-  message_store.set(element, custom_messages.get(element, msgtype, _default));
+  message_store.set(element, components_custom_messages.get(element, msgtype, _default));
 }
 
-var badInput = check$1(test_bad_input, function (element) {
-  return set_msg(element, 'badInput', _('Please match the requested type.'));
+var badInput = check(bad_input, function (element) {
+  return set_msg(element, 'badInput', localization('Please match the requested type.'));
 });
 
 function customError(element) {
   /* check, if there are custom validators in the registry, and call
    * them. */
-  var custom_validators = custom_validator_registry.get(element);
+  var custom_validators = components_registry.get(element);
   var cvl = custom_validators.length;
   var valid = true;
 
   if (cvl) {
     for (var i = 0; i < cvl; i++) {
       var result = custom_validators[i](element);
+
       if (result !== undefined && !result) {
         valid = false;
         /* break on first invalid response */
+
         break;
       }
     }
   }
-
   /* check, if there are other validity messages already */
+
+
   if (valid) {
     var msg = message_store.get(element);
     valid = !(msg.toString() && 'is_custom' in msg);
@@ -1381,35 +1695,36 @@ function customError(element) {
   return !valid;
 }
 
-var patternMismatch = check$1(test_pattern, function (element) {
-  set_msg(element, 'patternMismatch', element.title ? sprintf(_('PatternMismatchWithTitle'), element.title) : _('PatternMismatch'));
+var patternMismatch = check(validators_pattern, function (element) {
+  set_msg(element, 'patternMismatch', element.title ? sprintf(localization('PatternMismatchWithTitle'), element.title) : localization('PatternMismatch'));
 });
-
 /**
  * TODO: when rangeOverflow and rangeUnderflow are both called directly and
  * successful, the inRange and outOfRange classes won't get removed, unless
  * element.validityState.valid is queried, too.
  */
-var rangeOverflow = check$1(test_max, function (element) {
+
+var rangeOverflow = check(validators_max, function (element) {
   var type = get_type(element);
   var wrapper = get_wrapper(element);
   var outOfRangeClass = wrapper && wrapper.settings.classes.outOfRange || 'hf-out-of-range';
   var inRangeClass = wrapper && wrapper.settings.classes.inRange || 'hf-in-range';
-
-  var msg = void 0;
+  var msg;
 
   switch (type) {
     case 'date':
     case 'datetime':
     case 'datetime-local':
-      msg = sprintf(_('DateRangeOverflow'), format_date(string_to_date(element.getAttribute('max'), type), type));
+      msg = sprintf(localization('DateRangeOverflow'), format_date(string_to_date(element.getAttribute('max'), type), type));
       break;
+
     case 'time':
-      msg = sprintf(_('TimeRangeOverflow'), format_date(string_to_date(element.getAttribute('max'), type), type));
+      msg = sprintf(localization('TimeRangeOverflow'), format_date(string_to_date(element.getAttribute('max'), type), type));
       break;
     // case 'number':
+
     default:
-      msg = sprintf(_('NumberRangeOverflow'), string_to_number(element.getAttribute('max'), type));
+      msg = sprintf(localization('NumberRangeOverflow'), string_to_number(element.getAttribute('max'), type));
       break;
   }
 
@@ -1417,27 +1732,27 @@ var rangeOverflow = check$1(test_max, function (element) {
   element.classList.add(outOfRangeClass);
   element.classList.remove(inRangeClass);
 });
-
-var rangeUnderflow = check$1(test_min, function (element) {
+var rangeUnderflow = check(validators_min, function (element) {
   var type = get_type(element);
   var wrapper = get_wrapper(element);
   var outOfRangeClass = wrapper && wrapper.settings.classes.outOfRange || 'hf-out-of-range';
   var inRangeClass = wrapper && wrapper.settings.classes.inRange || 'hf-in-range';
-
-  var msg = void 0;
+  var msg;
 
   switch (type) {
     case 'date':
     case 'datetime':
     case 'datetime-local':
-      msg = sprintf(_('DateRangeUnderflow'), format_date(string_to_date(element.getAttribute('min'), type), type));
+      msg = sprintf(localization('DateRangeUnderflow'), format_date(string_to_date(element.getAttribute('min'), type), type));
       break;
+
     case 'time':
-      msg = sprintf(_('TimeRangeUnderflow'), format_date(string_to_date(element.getAttribute('min'), type), type));
+      msg = sprintf(localization('TimeRangeUnderflow'), format_date(string_to_date(element.getAttribute('min'), type), type));
       break;
     // case 'number':
+
     default:
-      msg = sprintf(_('NumberRangeUnderflow'), string_to_number(element.getAttribute('min'), type));
+      msg = sprintf(localization('NumberRangeUnderflow'), string_to_number(element.getAttribute('min'), type));
       break;
   }
 
@@ -1445,13 +1760,12 @@ var rangeUnderflow = check$1(test_min, function (element) {
   element.classList.add(outOfRangeClass);
   element.classList.remove(inRangeClass);
 });
-
-var stepMismatch = check$1(test_step, function (element) {
+var stepMismatch = check(validators_step, function (element) {
   var list = get_next_valid(element);
   var min = list[0];
   var max = list[1];
   var sole = false;
-  var msg = void 0;
+  var msg;
 
   if (min === null) {
     sole = max;
@@ -1460,62 +1774,60 @@ var stepMismatch = check$1(test_step, function (element) {
   }
 
   if (sole !== false) {
-    msg = sprintf(_('StepMismatchOneValue'), sole);
+    msg = sprintf(localization('StepMismatchOneValue'), sole);
   } else {
-    msg = sprintf(_('StepMismatch'), min, max);
+    msg = sprintf(localization('StepMismatch'), min, max);
   }
+
   set_msg(element, 'stepMismatch', msg);
 });
-
-var tooLong = check$1(test_maxlength, function (element) {
-  set_msg(element, 'tooLong', sprintf(_('TextTooLong'), element.getAttribute('maxlength'), unicode_string_length(element.value)));
+var tooLong = check(validators_maxlength, function (element) {
+  set_msg(element, 'tooLong', sprintf(localization('TextTooLong'), element.getAttribute('maxlength'), unicode_string_length(element.value)));
 });
-
-var tooShort = check$1(test_minlength, function (element) {
-  set_msg(element, 'tooShort', sprintf(_('Please lengthen this text to %l characters or more (you are currently using %l characters).'), element.getAttribute('minlength'), unicode_string_length(element.value)));
+var tooShort = check(validators_minlength, function (element) {
+  set_msg(element, 'tooShort', sprintf(localization('Please lengthen this text to %l characters or more (you are currently using %l characters).'), element.getAttribute('minlength'), unicode_string_length(element.value)));
 });
+var typeMismatch = check(validators_type, function (element) {
+  var msg = localization('Please use the appropriate format.');
 
-var typeMismatch = check$1(test_type, function (element) {
-  var msg = _('Please use the appropriate format.');
   var type = get_type(element);
 
   if (type === 'email') {
     if (element.hasAttribute('multiple')) {
-      msg = _('Please enter a comma separated list of email addresses.');
+      msg = localization('Please enter a comma separated list of email addresses.');
     } else {
-      msg = _('InvalidEmail');
+      msg = localization('InvalidEmail');
     }
   } else if (type === 'url') {
-    msg = _('InvalidURL');
+    msg = localization('InvalidURL');
   } else if (type === 'file') {
-    msg = _('Please select a file of the correct type.');
+    msg = localization('Please select a file of the correct type.');
   }
 
   set_msg(element, 'typeMismatch', msg);
 });
+var valueMissing = check(required, function (element) {
+  var msg = localization('ValueMissing');
 
-var valueMissing = check$1(test_required, function (element) {
-  var msg = _('ValueMissing');
   var type = get_type(element);
 
   if (type === 'checkbox') {
-    msg = _('CheckboxMissing');
+    msg = localization('CheckboxMissing');
   } else if (type === 'radio') {
-    msg = _('RadioMissing');
+    msg = localization('RadioMissing');
   } else if (type === 'file') {
     if (element.hasAttribute('multiple')) {
-      msg = _('Please select one or more files.');
+      msg = localization('Please select one or more files.');
     } else {
-      msg = _('FileMissing');
+      msg = localization('FileMissing');
     }
   } else if (element instanceof window.HTMLSelectElement) {
-    msg = _('SelectMissing');
+    msg = localization('SelectMissing');
   }
 
   set_msg(element, 'valueMissing', msg);
 });
-
-var validity_state_checkers = {
+/* harmony default export */ var validity_state_checkers = ({
   badInput: badInput,
   customError: customError,
   patternMismatch: patternMismatch,
@@ -1526,17 +1838,26 @@ var validity_state_checkers = {
   tooShort: tooShort,
   typeMismatch: typeMismatch,
   valueMissing: valueMissing
-};
+});
+// CONCATENATED MODULE: ./src/polyfills/validityState.js
+
+
+
+
+
+
 
 /**
  * the validity state constructor
  */
+
 var ValidityState = function ValidityState(element) {
   if (!(element instanceof window.HTMLElement)) {
     throw new Error('cannot create a ValidityState for a non-element');
   }
 
   var cached = ValidityState.cache.get(element);
+
   if (cached) {
     return cached;
   }
@@ -1549,40 +1870,41 @@ var ValidityState = function ValidityState(element) {
   this.element = element;
   ValidityState.cache.set(element, this);
 };
-
 /**
  * the prototype for new validityState instances
  */
+
+
 var ValidityStatePrototype = {};
 ValidityState.prototype = ValidityStatePrototype;
-
 ValidityState.cache = new WeakMap();
-
 /* small wrapper around the actual validator to check if the validator
  * should actually be called. `this` refers to the ValidityState object. */
-var checker_getter = function checker_getter(func) {
+
+var validityState_checker_getter = function checker_getter(func) {
   return function () {
     if (!is_validation_candidate(this.element)) {
       /* not being validated == valid by default */
       return true;
     }
+
     return func(this.element);
   };
 };
-
 /**
  * copy functionality from the validity checkers to the ValidityState
  * prototype
  */
-for (var prop in validity_state_checkers) {
-  Object.defineProperty(ValidityStatePrototype, prop, {
+
+
+for (var validityState_prop in validity_state_checkers) {
+  Object.defineProperty(ValidityStatePrototype, validityState_prop, {
     configurable: true,
     enumerable: true,
-    get: checker_getter(validity_state_checkers[prop]),
+    get: validityState_checker_getter(validity_state_checkers[validityState_prop]),
     set: undefined
   });
 }
-
 /**
  * the "valid" property calls all other validity checkers and returns true,
  * if all those return false.
@@ -1590,6 +1912,8 @@ for (var prop in validity_state_checkers) {
  * This is the major access point for _all_ other API methods, namely
  * (check|report)Validity().
  */
+
+
 Object.defineProperty(ValidityStatePrototype, 'valid', {
   configurable: true,
   enumerable: true,
@@ -1607,7 +1931,6 @@ Object.defineProperty(ValidityStatePrototype, 'valid', {
     var inRangeClass = wrapper && wrapper.settings.classes.inRange || 'hf-in-range';
     var outOfRangeClass = wrapper && wrapper.settings.classes.outOfRange || 'hf-out-of-range';
     var validatedClass = wrapper && wrapper.settings.classes.validated || 'hf-validated';
-
     this.element.classList.add(validatedClass);
 
     for (var _prop in validity_state_checkers) {
@@ -1615,11 +1938,13 @@ Object.defineProperty(ValidityStatePrototype, 'valid', {
         this.element.classList.add(invalidClass);
         this.element.classList.remove(validClass);
         this.element.classList.remove(userValidClass);
+
         if (this.element.value !== this.element.defaultValue) {
           this.element.classList.add(userInvalidClass);
         } else {
           this.element.classList.remove(userInvalidClass);
         }
+
         this.element.setAttribute('aria-invalid', 'true');
         return false;
       }
@@ -1631,25 +1956,36 @@ Object.defineProperty(ValidityStatePrototype, 'valid', {
     this.element.classList.remove(outOfRangeClass);
     this.element.classList.add(validClass);
     this.element.classList.add(inRangeClass);
+
     if (this.element.value !== this.element.defaultValue) {
       this.element.classList.add(userValidClass);
     } else {
       this.element.classList.remove(userValidClass);
     }
+
     this.element.setAttribute('aria-invalid', 'false');
     return true;
   },
   set: undefined
 });
-
 /**
  * mark the validity prototype, because that is what the client-facing
  * code deals with mostly, not the property descriptor thing */
+
 mark(ValidityStatePrototype);
+/* harmony default export */ var validityState = (ValidityState);
+// CONCATENATED MODULE: ./src/polyfills/reportValidity.js
+
+
+
+
+
+
 
 /**
  * check element's validity and report an error back to the user
  */
+
 function reportValidity(element) {
   /* if this is a <form>, report validity of all child inputs */
   if (element instanceof window.HTMLFormElement) {
@@ -1660,26 +1996,41 @@ function reportValidity(element) {
     delete element.__hf_form_validation;
     return form_valid;
   }
-
   /* we copy checkValidity() here, b/c we have to check if the "invalid"
    * event was canceled. */
-  var valid = ValidityState(element).valid;
+
+
+  var valid = validityState(element).valid;
   var event;
+
   if (valid) {
     var wrapped_form = get_wrapper(element);
+
     if (wrapped_form && wrapped_form.settings.validEvent) {
-      event = trigger_event(element, 'valid', { cancelable: true });
+      event = trigger_event(element, 'valid', {
+        cancelable: true
+      });
     }
   } else {
-    event = trigger_event(element, 'invalid', { cancelable: true });
+    event = trigger_event(element, 'invalid', {
+      cancelable: true
+    });
   }
 
   if (!event || !event.defaultPrevented) {
-    Renderer.showWarning(element, !!element.form.__hf_form_validation);
+    components_renderer.showWarning(element, !!element.form.__hf_form_validation);
   }
 
   return valid;
 }
+// CONCATENATED MODULE: ./src/tools/catch_submit.js
+
+
+
+
+
+
+
 
 /**
  * submit a form, because `element` triggered it
@@ -1690,6 +2041,7 @@ function reportValidity(element) {
  * If the element is a button with a name, the name=value pair will be added
  * to the submitted data.
  */
+
 function submit_form_via(element) {
   /* apparently, the submit event is not triggered in most browsers on
    * the submit() method, so we do it manually here to model a natural
@@ -1701,9 +2053,11 @@ function submit_form_via(element) {
    * And as you already suspected, the correct answer is: both! Firefox
    * opts for 1), Chrome for 2). Yay! */
   var event_got_cancelled;
-
-  var submit_event = create_event('submit', { cancelable: true });
+  var submit_event = create_event('submit', {
+    cancelable: true
+  });
   /* force Firefox to not submit the form, then fake preventDefault() */
+
   submit_event.preventDefault();
   Object.defineProperty(submit_event, 'defaultPrevented', {
     value: false,
@@ -1715,7 +2069,9 @@ function submit_form_via(element) {
     },
     writable: true
   });
-  trigger_event(element.form, submit_event, {}, { submittedVia: element });
+  trigger_event(element.form, submit_event, {}, {
+    submittedVia: element
+  });
 
   if (!event_got_cancelled) {
     add_submit_field(element);
@@ -1725,15 +2081,17 @@ function submit_form_via(element) {
     });
   }
 }
-
 /**
  * if a submit button was clicked, add its name=value by means of a type=hidden
  * input field
  */
+
+
 function add_submit_field(button) {
   if (['image', 'submit'].indexOf(button.type) > -1 && button.name) {
     var wrapper = get_wrapper(button.form) || {};
     var submit_helper = wrapper.submit_helper;
+
     if (submit_helper) {
       if (submit_helper.parentNode) {
         submit_helper.parentNode.removeChild(submit_helper);
@@ -1743,25 +2101,27 @@ function add_submit_field(button) {
       submit_helper.type = 'hidden';
       wrapper.submit_helper = submit_helper;
     }
+
     submit_helper.name = button.name;
     submit_helper.value = button.value;
     button.form.appendChild(submit_helper);
   }
 }
-
 /**
  * remove a possible helper input, that was added by `add_submit_field`
  */
+
+
 function remove_submit_field(button) {
   if (['image', 'submit'].indexOf(button.type) > -1 && button.name) {
     var wrapper = get_wrapper(button.form) || {};
     var submit_helper = wrapper.submit_helper;
+
     if (submit_helper && submit_helper.parentNode) {
       submit_helper.parentNode.removeChild(submit_helper);
     }
   }
 }
-
 /**
  * check a form's validity and submit it
  *
@@ -1770,9 +2130,14 @@ function remove_submit_field(button) {
  *
  * If the form is found to contain invalid fields, focus the first field.
  */
-function check(button) {
+
+
+function catch_submit_check(button) {
   /* trigger a "validate" event on the form to be submitted */
-  var val_event = trigger_event(button.form, 'validate', { cancelable: true });
+  var val_event = trigger_event(button.form, 'validate', {
+    cancelable: true
+  });
+
   if (val_event.defaultPrevented) {
     /* skip the whole submit thing, if the validation is canceled. A user
      * can still call form.submit() afterwards. */
@@ -1784,6 +2149,7 @@ function check(button) {
   get_validated_elements(button.form).map(function (element) {
     if (!reportValidity(element)) {
       valid = false;
+
       if (!first_invalid && 'focus' in element) {
         first_invalid = element;
       }
@@ -1796,77 +2162,72 @@ function check(button) {
     /* focus the first invalid element, if validation went south */
     first_invalid.focus();
     /* tell the tale, if anyone wants to react to it */
+
     trigger_event(button.form, 'forminvalid');
   }
 }
-
 /**
  * test if node is a submit button
  */
+
+
 function is_submit_button(node) {
   return (
     /* must be an input or button element... */
     (node.nodeName === 'INPUT' || node.nodeName === 'BUTTON') && (
-
     /* ...and have a submitting type */
     node.type === 'image' || node.type === 'submit')
   );
 }
-
 /**
  * test, if the click event would trigger a submit
  */
+
+
 function is_submitting_click(event, button) {
   return (
     /* prevented default: won't trigger a submit */
     !event.defaultPrevented && (
-
     /* left button or middle button (submits in Chrome) */
     !('button' in event) || event.button < 2) &&
-
     /* must be a submit button... */
     is_submit_button(button) &&
-
     /* the button needs a form, that's going to be submitted */
     button.form &&
-
     /* again, if the form should not be validated, we're out of the game */
     !button.form.hasAttribute('novalidate')
   );
 }
-
 /**
  * test, if the keypress event would trigger a submit
  */
+
+
 function is_submitting_keypress(event) {
   return (
     /* prevented default: won't trigger a submit */
     !event.defaultPrevented && (
     /* ...and <Enter> was pressed... */
     event.keyCode === 13 &&
-
     /* ...on an <input> that is... */
     event.target.nodeName === 'INPUT' &&
-
     /* ...a standard text input field (not checkbox, ...) */
-    text_types.indexOf(event.target.type) > -1 ||
+    types_text.indexOf(event.target.type) > -1 ||
     /* or <Enter> or <Space> was pressed... */
     (event.keyCode === 13 || event.keyCode === 32) &&
-
     /* ...on a submit button */
     is_submit_button(event.target)) &&
-
     /* there's a form... */
     event.target.form &&
-
     /* ...and the form allows validation */
     !event.target.form.hasAttribute('novalidate')
   );
 }
-
 /**
  * catch clicks to children of <button>s
  */
+
+
 function get_clicked_button(element) {
   if (is_submit_button(element)) {
     return element;
@@ -1876,47 +2237,54 @@ function get_clicked_button(element) {
     return null;
   }
 }
-
 /**
  * return event handler to catch explicit submission by click on a button
  */
+
+
 function get_click_handler() {
   var ignore = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
   return function (event) {
     var button = get_clicked_button(event.target);
+
     if (button && is_submitting_click(event, button)) {
       event.preventDefault();
+
       if (ignore || button.hasAttribute('formnovalidate')) {
         /* if validation should be ignored, we're not interested in any checks */
         submit_form_via(button);
       } else {
-        check(button);
+        catch_submit_check(button);
       }
     }
   };
 }
+
 var click_handler = get_click_handler();
 var ignored_click_handler = get_click_handler(true);
-
 /**
  * catch implicit submission by pressing <Enter> in some situations
  */
+
 function get_keypress_handler(ignore) {
   return function keypress_handler(event) {
     if (is_submitting_keypress(event)) {
       event.preventDefault();
+      var wrapper = get_wrapper(event.target.form) || {
+        settings: {}
+      };
 
-      var wrapper = get_wrapper(event.target.form) || { settings: {} };
       if (wrapper.settings.preventImplicitSubmit) {
         /* user doesn't want an implicit submit. Cancel here. */
         return;
       }
-
       /* check, that there is no submit button in the form. Otherwise
       * that should be clicked. */
+
+
       var el = event.target.form.elements.length;
       var submit;
+
       for (var i = 0; i < el; i++) {
         if (['image', 'submit'].indexOf(event.target.form.elements[i].type) > -1) {
           submit = event.target.form.elements[i];
@@ -1929,14 +2297,14 @@ function get_keypress_handler(ignore) {
       } else if (ignore) {
         submit_form_via(event.target);
       } else {
-        check(event.target);
+        catch_submit_check(event.target);
       }
     }
   };
 }
-var keypress_handler = get_keypress_handler();
-var ignored_keypress_handler = get_keypress_handler(true);
 
+var catch_submit_keypress_handler = get_keypress_handler();
+var ignored_keypress_handler = get_keypress_handler(true);
 /**
  * catch all relevant events _prior_ to a form being submitted
  *
@@ -1944,6 +2312,7 @@ var ignored_keypress_handler = get_keypress_handler(true);
  *                    form is detected. True, when the wrapper's revalidate
  *                    setting is 'never'.
  */
+
 function catch_submit(listening_node) {
   var ignore = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -1952,34 +2321,40 @@ function catch_submit(listening_node) {
     listening_node.addEventListener('keypress', ignored_keypress_handler);
   } else {
     listening_node.addEventListener('click', click_handler);
-    listening_node.addEventListener('keypress', keypress_handler);
+    listening_node.addEventListener('keypress', catch_submit_keypress_handler);
   }
 }
-
 /**
  * decommission the event listeners from catch_submit() again
  */
+
 function uncatch_submit(listening_node) {
   listening_node.removeEventListener('click', ignored_click_handler);
   listening_node.removeEventListener('keypress', ignored_keypress_handler);
   listening_node.removeEventListener('click', click_handler);
-  listening_node.removeEventListener('keypress', keypress_handler);
+  listening_node.removeEventListener('keypress', catch_submit_keypress_handler);
 }
+// CONCATENATED MODULE: ./src/tools/property_uninstaller.js
+
+
 
 /**
  * remove `property` from element and restore _original_property, if present
  */
-function uninstall_property (element, property) {
+
+/* harmony default export */ var property_uninstaller = (function (element, property) {
   try {
     delete element[property];
   } catch (e) {
     /* Safari <= 9 and PhantomJS will end up here :-( Nothing to do except
      * warning */
     var wrapper = get_wrapper(element);
+
     if (wrapper && wrapper.settings.debug) {
       /* global console */
       console.log('[hyperform] cannot uninstall custom property ' + property);
     }
+
     return false;
   }
 
@@ -1988,7 +2363,10 @@ function uninstall_property (element, property) {
   if (original_descriptor) {
     Object.defineProperty(element, property, original_descriptor);
   }
-}
+});
+// CONCATENATED MODULE: ./src/tools/property_installer.js
+
+
 
 /**
  * add `property` to an element
@@ -1996,9 +2374,11 @@ function uninstall_property (element, property) {
  * js> installer(element, 'foo', { value: 'bar' });
  * js> assert(element.foo === 'bar');
  */
-function install_property (element, property, descriptor) {
+
+/* harmony default export */ var property_installer = (function (element, property, descriptor) {
   descriptor.configurable = true;
   descriptor.enumerable = true;
+
   if ('value' in descriptor) {
     descriptor.writable = true;
   }
@@ -2006,53 +2386,68 @@ function install_property (element, property, descriptor) {
   var original_descriptor = Object.getOwnPropertyDescriptor(element, property);
 
   if (original_descriptor) {
-
     if (original_descriptor.configurable === false) {
       /* Safari <= 9 and PhantomJS will end up here :-( Nothing to do except
        * warning */
       var wrapper = get_wrapper(element);
+
       if (wrapper && wrapper.settings.debug) {
         /* global console */
         console.log('[hyperform] cannot install custom property ' + property);
       }
+
       return false;
     }
-
     /* we already installed that property... */
+
+
     if (original_descriptor.get && original_descriptor.get.__hyperform || original_descriptor.value && original_descriptor.value.__hyperform) {
       return;
     }
-
     /* publish existing property under new name, if it's not from us */
+
+
     Object.defineProperty(element, '_original_' + property, original_descriptor);
   }
 
   delete element[property];
   Object.defineProperty(element, property, descriptor);
-
   return true;
-}
+});
+// CONCATENATED MODULE: ./src/tools/is_field.js
 
-function is_field (element) {
-        return element instanceof window.HTMLButtonElement || element instanceof window.HTMLInputElement || element instanceof window.HTMLSelectElement || element instanceof window.HTMLTextAreaElement || element instanceof window.HTMLFieldSetElement || element === window.HTMLButtonElement.prototype || element === window.HTMLInputElement.prototype || element === window.HTMLSelectElement.prototype || element === window.HTMLTextAreaElement.prototype || element === window.HTMLFieldSetElement.prototype;
-}
+
+/* harmony default export */ var is_field = (function (element) {
+  return element instanceof window.HTMLButtonElement || element instanceof window.HTMLInputElement || element instanceof window.HTMLSelectElement || element instanceof window.HTMLTextAreaElement || element instanceof window.HTMLFieldSetElement || element === window.HTMLButtonElement.prototype || element === window.HTMLInputElement.prototype || element === window.HTMLSelectElement.prototype || element === window.HTMLTextAreaElement.prototype || element === window.HTMLFieldSetElement.prototype;
+});
+// CONCATENATED MODULE: ./src/polyfills/setCustomValidity.js
+
+
 
 /**
  * set a custom validity message or delete it with an empty string
  */
+
 function setCustomValidity(element, msg) {
   message_store.set(element, msg, true);
 }
+// CONCATENATED MODULE: ./src/polyfills/valueAsDate.js
+
+
+
+
+
 
 /**
  * implement the valueAsDate functionality
  *
  * @see https://html.spec.whatwg.org/multipage/forms.html#dom-input-valueasdate
  */
+
 function valueAsDate(element) {
   var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-
   var type = get_type(element);
+
   if (dates.indexOf(type) > -1) {
     if (value !== undefined) {
       /* setter: value must be null or a Date() */
@@ -2067,6 +2462,7 @@ function valueAsDate(element) {
       } else {
         throw new window.DOMException('valueAsDate setter encountered invalid value', 'TypeError');
       }
+
       return;
     }
 
@@ -2079,16 +2475,23 @@ function valueAsDate(element) {
 
   return null;
 }
+// CONCATENATED MODULE: ./src/polyfills/valueAsNumber.js
+
+
+
+
+
 
 /**
  * implement the valueAsNumber functionality
  *
  * @see https://html.spec.whatwg.org/multipage/forms.html#dom-input-valueasnumber
  */
+
 function valueAsNumber(element) {
   var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-
   var type = get_type(element);
+
   if (numbers.indexOf(type) > -1) {
     if (type === 'range' && element.hasAttribute('multiple')) {
       /* @see https://html.spec.whatwg.org/multipage/forms.html#do-not-apply */
@@ -2109,11 +2512,14 @@ function valueAsNumber(element) {
             throw e;
           }
           /* ... set it via Number.toString(). */
+
+
           element.value = value.toString();
         }
       } else {
         throw new window.DOMException('valueAsNumber setter encountered invalid value', 'TypeError');
       }
+
       return;
     }
 
@@ -2125,16 +2531,24 @@ function valueAsNumber(element) {
 
   return NaN;
 }
+// CONCATENATED MODULE: ./src/polyfills/stepDown.js
+
+
+
+
+
 
 /**
  *
  */
+
 function stepDown(element) {
   var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if (numbers.indexOf(get_type(element)) === -1) {
     throw new window.DOMException('stepDown encountered invalid type', 'InvalidStateError');
   }
+
   if ((element.getAttribute('step') || '').toLowerCase() === 'any') {
     throw new window.DOMException('stepDown encountered step "any"', 'InvalidStateError');
   }
@@ -2145,16 +2559,24 @@ function stepDown(element) {
     valueAsNumber(element, prev);
   }
 }
+// CONCATENATED MODULE: ./src/polyfills/stepUp.js
+
+
+
+
+
 
 /**
  *
  */
+
 function stepUp(element) {
   var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
   if (numbers.indexOf(get_type(element)) === -1) {
     throw new window.DOMException('stepUp encountered invalid type', 'InvalidStateError');
   }
+
   if ((element.getAttribute('step') || '').toLowerCase() === 'any') {
     throw new window.DOMException('stepUp encountered step "any"', 'InvalidStateError');
   }
@@ -2165,47 +2587,63 @@ function stepUp(element) {
     valueAsNumber(element, next);
   }
 }
+// CONCATENATED MODULE: ./src/polyfills/validationMessage.js
+
+
 
 /**
  * get the validation message for an element, empty string, if the element
  * satisfies all constraints.
  */
+
 function validationMessage(element) {
   var msg = message_store.get(element);
+
   if (!msg) {
     return '';
   }
-
   /* make it a primitive again, since message_store returns String(). */
+
+
   return msg.toString();
 }
+// CONCATENATED MODULE: ./src/polyfills/willValidate.js
+
+
 
 /**
  * check, if an element will be subject to HTML5 validation at all
  */
+
 function willValidate(element) {
   return is_validation_candidate(element);
 }
+// CONCATENATED MODULE: ./src/polyfills/properties.js
 
-var gA = function gA(prop) {
+
+
+
+
+
+var properties_gA = function gA(prop) {
   return function () {
     return do_filter('attr_get_' + prop, this.getAttribute(prop), this);
   };
 };
 
-var sA = function sA(prop) {
+var properties_sA = function sA(prop) {
   return function (value) {
     this.setAttribute(prop, do_filter('attr_set_' + prop, value, this));
   };
 };
 
-var gAb = function gAb(prop) {
+var properties_gAb = function gAb(prop) {
   return function () {
     return do_filter('attr_get_' + prop, this.hasAttribute(prop), this);
   };
 };
 
-var sAb = function sAb(prop) {
+var properties_sAb = function sAb(prop) {
   return function (value) {
     if (do_filter('attr_set_' + prop, value, this)) {
       this.setAttribute(prop, prop);
@@ -2215,15 +2653,16 @@ var sAb = function sAb(prop) {
   };
 };
 
-var gAn = function gAn(prop) {
+var properties_gAn = function gAn(prop) {
   return function () {
     return do_filter('attr_get_' + prop, Math.max(0, Number(this.getAttribute(prop))), this);
   };
 };
 
-var sAn = function sAn(prop) {
+var properties_sAn = function sAn(prop) {
   return function (value) {
     value = do_filter('attr_set_' + prop, value, this);
+
     if (/^[0-9]+$/.test(value)) {
       this.setAttribute(prop, value);
     }
@@ -2235,27 +2674,29 @@ function install_properties(element) {
 
   for (var _i = 0; _i < _arr.length; _i++) {
     var prop = _arr[_i];
-    install_property(element, prop, {
-      get: gA(prop),
-      set: sA(prop)
+    property_installer(element, prop, {
+      get: properties_gA(prop),
+      set: properties_sA(prop)
     });
   }
 
   var _arr2 = ['multiple', 'required', 'readOnly'];
+
   for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
     var _prop = _arr2[_i2];
-    install_property(element, _prop, {
-      get: gAb(_prop.toLowerCase()),
-      set: sAb(_prop.toLowerCase())
+    property_installer(element, _prop, {
+      get: properties_gAb(_prop.toLowerCase()),
+      set: properties_sAb(_prop.toLowerCase())
     });
   }
 
   var _arr3 = ['minLength', 'maxLength'];
+
   for (var _i3 = 0; _i3 < _arr3.length; _i3++) {
     var _prop2 = _arr3[_i3];
-    install_property(element, _prop2, {
-      get: gAn(_prop2.toLowerCase()),
-      set: sAn(_prop2.toLowerCase())
+    property_installer(element, _prop2, {
+      get: properties_gAn(_prop2.toLowerCase()),
+      set: properties_sAn(_prop2.toLowerCase())
     });
   }
 }
@@ -2265,14 +2706,32 @@ function uninstall_properties(element) {
 
   for (var _i4 = 0; _i4 < _arr4.length; _i4++) {
     var prop = _arr4[_i4];
-    uninstall_property(element, prop);
+    property_uninstaller(element, prop);
   }
 }
+
+
+// CONCATENATED MODULE: ./src/tools/polyfill.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var polyfills = {
   checkValidity: {
     value: mark(function () {
-      return checkValidity(this);
+      return polyfills_checkValidity(this);
     })
   },
   reportValidity: {
@@ -2304,7 +2763,7 @@ var polyfills = {
   },
   validity: {
     get: mark(function () {
-      return ValidityState(this);
+      return validityState(this);
     })
   },
   valueAsDate: {
@@ -2329,53 +2788,62 @@ var polyfills = {
     })
   }
 };
-
-function polyfill (element) {
+/* harmony default export */ var polyfill = (function (element) {
   if (is_field(element)) {
-
     for (var prop in polyfills) {
-      install_property(element, prop, polyfills[prop]);
+      property_installer(element, prop, polyfills[prop]);
     }
 
     install_properties(element);
   } else if (element instanceof window.HTMLFormElement || element === window.HTMLFormElement.prototype) {
-    install_property(element, 'checkValidity', polyfills.checkValidity);
-    install_property(element, 'reportValidity', polyfills.reportValidity);
+    property_installer(element, 'checkValidity', polyfills.checkValidity);
+    property_installer(element, 'reportValidity', polyfills.reportValidity);
   }
-}
+});
+// CONCATENATED MODULE: ./src/tools/polyunfill.js
 
-function polyunfill (element) {
+
+
+
+
+/* harmony default export */ var polyunfill = (function (element) {
   if (is_field(element)) {
-
-    uninstall_property(element, 'checkValidity');
-    uninstall_property(element, 'reportValidity');
-    uninstall_property(element, 'setCustomValidity');
-    uninstall_property(element, 'stepDown');
-    uninstall_property(element, 'stepUp');
-    uninstall_property(element, 'validationMessage');
-    uninstall_property(element, 'validity');
-    uninstall_property(element, 'valueAsDate');
-    uninstall_property(element, 'valueAsNumber');
-    uninstall_property(element, 'willValidate');
-
+    property_uninstaller(element, 'checkValidity');
+    property_uninstaller(element, 'reportValidity');
+    property_uninstaller(element, 'setCustomValidity');
+    property_uninstaller(element, 'stepDown');
+    property_uninstaller(element, 'stepUp');
+    property_uninstaller(element, 'validationMessage');
+    property_uninstaller(element, 'validity');
+    property_uninstaller(element, 'valueAsDate');
+    property_uninstaller(element, 'valueAsNumber');
+    property_uninstaller(element, 'willValidate');
     uninstall_properties(element);
   } else if (element instanceof window.HTMLFormElement) {
-    uninstall_property(element, 'checkValidity');
-    uninstall_property(element, 'reportValidity');
+    property_uninstaller(element, 'checkValidity');
+    property_uninstaller(element, 'reportValidity');
   }
-}
+});
+// CONCATENATED MODULE: ./src/components/wrapper.js
+
+
+
+
+
+
+
 
 var instances = new WeakMap();
-
 /**
  * wrap <form>s, window or document, that get treated with the global
  * hyperform()
  */
-function Wrapper(form, settings) {
 
+function Wrapper(form, settings) {
   /* do not allow more than one instance per form. Otherwise we'd end
    * up with double event handlers, polyfills re-applied, ... */
   var existing = instances.get(form);
+
   if (existing) {
     existing.settings = settings;
     return existing;
@@ -2384,9 +2852,7 @@ function Wrapper(form, settings) {
   this.form = form;
   this.settings = settings;
   this.revalidator = this.revalidate.bind(this);
-
   instances.set(form, this);
-
   catch_submit(form, settings.revalidate === 'never');
 
   if (form === window || form.nodeType === 9) {
@@ -2395,6 +2861,7 @@ function Wrapper(form, settings) {
     polyfill(window.HTMLFormElement);
   } else if (form instanceof window.HTMLFormElement || form instanceof window.HTMLFieldSetElement) {
     this.install(form.elements);
+
     if (form instanceof window.HTMLFormElement) {
       polyfill(form);
     }
@@ -2406,6 +2873,7 @@ function Wrapper(form, settings) {
     form.addEventListener('keyup', this.revalidator);
     form.addEventListener('change', this.revalidator);
   }
+
   if (settings.revalidate === 'onblur' || settings.revalidate === 'hybrid') {
     /* useCapture=true, because `blur` doesn't bubble. See
      * https://developer.mozilla.org/en-US/docs/Web/Events/blur#Event_delegation
@@ -2413,7 +2881,6 @@ function Wrapper(form, settings) {
     form.addEventListener('blur', this.revalidator, true);
   }
 }
-
 Wrapper.prototype = {
   destroy: function destroy() {
     uncatch_submit(this.form);
@@ -2421,35 +2888,35 @@ Wrapper.prototype = {
     this.form.removeEventListener('keyup', this.revalidator);
     this.form.removeEventListener('change', this.revalidator);
     this.form.removeEventListener('blur', this.revalidator, true);
+
     if (this.form === window || this.form.nodeType === 9) {
       this.uninstall([window.HTMLButtonElement.prototype, window.HTMLInputElement.prototype, window.HTMLSelectElement.prototype, window.HTMLTextAreaElement.prototype, window.HTMLFieldSetElement.prototype]);
       polyunfill(window.HTMLFormElement);
     } else if (this.form instanceof window.HTMLFormElement || this.form instanceof window.HTMLFieldSetElement) {
       this.uninstall(this.form.elements);
+
       if (this.form instanceof window.HTMLFormElement) {
         polyunfill(this.form);
       }
     }
   },
 
-
   /**
    * revalidate an input element
    */
   revalidate: function revalidate(event) {
     if (event.target instanceof window.HTMLButtonElement || event.target instanceof window.HTMLTextAreaElement || event.target instanceof window.HTMLSelectElement || event.target instanceof window.HTMLInputElement) {
-
       if (this.settings.revalidate === 'hybrid') {
         /* "hybrid" somewhat simulates what browsers do. See for example
          * Firefox's :-moz-ui-invalid pseudo-class:
          * https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid */
-        if (event.type === 'blur' && event.target.value !== event.target.defaultValue || ValidityState(event.target).valid) {
+        if (event.type === 'blur' && event.target.value !== event.target.defaultValue || validityState(event.target).valid) {
           /* on blur, update the report when the value has changed from the
            * default or when the element is valid (possibly removing a still
            * standing invalidity report). */
           reportValidity(event.target);
         } else if (event.type === 'keyup' && event.keyCode !== 9 || event.type === 'change') {
-          if (ValidityState(event.target).valid) {
+          if (validityState(event.target).valid) {
             // report instantly, when an element becomes valid,
             // postpone report to blur event, when an element is invalid
             reportValidity(event.target);
@@ -2462,7 +2929,6 @@ Wrapper.prototype = {
       }
     }
   },
-
 
   /**
    * install the polyfills on each given element
@@ -2499,13 +2965,13 @@ Wrapper.prototype = {
     }
   }
 };
-
 /**
  * try to get the appropriate wrapper for a specific element by looking up
  * its parent chain
  *
  * @return Wrapper | undefined
  */
+
 function get_wrapper(element) {
   var wrapped;
 
@@ -2513,8 +2979,9 @@ function get_wrapper(element) {
     /* try a shortcut with the element's <form> */
     wrapped = instances.get(element.form);
   }
-
   /* walk up the parent nodes until document (including) */
+
+
   while (!wrapped && element) {
     wrapped = instances.get(element);
     element = element.parentNode;
@@ -2527,6 +2994,9 @@ function get_wrapper(element) {
 
   return wrapped;
 }
+// CONCATENATED MODULE: ./src/tools/get_validated_elements.js
+
+
 
 /**
  * filter a form's elements for the ones needing validation prior to
@@ -2534,17 +3004,21 @@ function get_wrapper(element) {
  *
  * Returns an array of form elements.
  */
+
 function get_validated_elements(form) {
   var wrapped_form = get_wrapper(form);
-
   return Array.prototype.filter.call(form.elements, function (element) {
     /* it must have a name (or validating nameless inputs is allowed) */
     if (element.getAttribute('name') || wrapped_form && wrapped_form.settings.validateNameless) {
       return true;
     }
+
     return false;
   });
 }
+// CONCATENATED MODULE: ./src/tools/return_hook_or.js
+
+
 
 /**
  * return either the data of a hook call or the result of action, if the
@@ -2552,7 +3026,8 @@ function get_validated_elements(form) {
  *
  * @return function a function wrapper around action
  */
-function return_hook_or (hook, action) {
+
+/* harmony default export */ var return_hook_or = (function (hook, action) {
   return function () {
     var data = call_hook(hook, Array.prototype.slice.call(arguments));
 
@@ -2562,11 +3037,19 @@ function return_hook_or (hook, action) {
 
     return action.apply(this, arguments);
   };
-}
+});
+// CONCATENATED MODULE: ./src/polyfills/checkValidity.js
+
+
+
+
+
+
 
 /**
  * check an element's validity with respect to it's form
  */
+
 var checkValidity = return_hook_or('checkValidity', function (element) {
   /* if this is a <form>, check validity of all child inputs */
   if (element instanceof window.HTMLFormElement) {
@@ -2574,60 +3057,90 @@ var checkValidity = return_hook_or('checkValidity', function (element) {
       return b;
     });
   }
-
   /* default is true, also for elements that are no validation candidates */
-  var valid = ValidityState(element).valid;
+
+
+  var valid = validityState(element).valid;
+
   if (valid) {
     var wrapped_form = get_wrapper(element);
+
     if (wrapped_form && wrapped_form.settings.validEvent) {
       trigger_event(element, 'valid');
     }
   } else {
-    trigger_event(element, 'invalid', { cancelable: true });
+    trigger_event(element, 'invalid', {
+      cancelable: true
+    });
   }
 
   return valid;
 });
+/* harmony default export */ var polyfills_checkValidity = (checkValidity);
+// CONCATENATED MODULE: ./src/version.js
 
-var version = '0.9.15';
+
+/* harmony default export */ var version = ('0.9.15');
+// CONCATENATED MODULE: ./src/hyperform.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* deprecate the old snake_case names
  * TODO: delme before next non-patch release
  */
+
 function w(name) {
   var deprecated_message = 'Please use camelCase method names! The name "%s" is deprecated and will be removed in the next non-patch release.';
   /* global console */
+
   console.log(sprintf(deprecated_message, name));
 }
-
 /**
  * public hyperform interface:
  */
+
+
 function hyperform(form) {
-  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  var classes = _ref.classes;
-  var _ref$debug = _ref.debug;
-  var debug = _ref$debug === undefined ? false : _ref$debug;
-  var extend_fieldset = _ref.extend_fieldset;
-  var extendFieldset = _ref.extendFieldset;
-  var novalidate_on_elements = _ref.novalidate_on_elements;
-  var novalidateOnElements = _ref.novalidateOnElements;
-  var prevent_implicit_submit = _ref.prevent_implicit_submit;
-  var preventImplicitSubmit = _ref.preventImplicitSubmit;
-  var revalidate = _ref.revalidate;
-  var _ref$strict = _ref.strict;
-  var strict = _ref$strict === undefined ? false : _ref$strict;
-  var valid_event = _ref.valid_event;
-  var validEvent = _ref.validEvent;
-  var _ref$validateNameless = _ref.validateNameless;
-  var validateNameless = _ref$validateNameless === undefined ? false : _ref$validateNameless;
-
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      classes = _ref.classes,
+      _ref$debug = _ref.debug,
+      debug = _ref$debug === void 0 ? false : _ref$debug,
+      extend_fieldset = _ref.extend_fieldset,
+      extendFieldset = _ref.extendFieldset,
+      novalidate_on_elements = _ref.novalidate_on_elements,
+      novalidateOnElements = _ref.novalidateOnElements,
+      prevent_implicit_submit = _ref.prevent_implicit_submit,
+      preventImplicitSubmit = _ref.preventImplicitSubmit,
+      revalidate = _ref.revalidate,
+      _ref$strict = _ref.strict,
+      strict = _ref$strict === void 0 ? false : _ref$strict,
+      valid_event = _ref.valid_event,
+      validEvent = _ref.validEvent,
+      _ref$validateNameless = _ref.validateNameless,
+      validateNameless = _ref$validateNameless === void 0 ? false : _ref$validateNameless;
 
   if (!classes) {
     classes = {};
-  }
-  // TODO: clean up before next non-patch release
+  } // TODO: clean up before next non-patch release
+
+
   if (extendFieldset === undefined) {
     if (extend_fieldset === undefined) {
       extendFieldset = !strict;
@@ -2636,6 +3149,7 @@ function hyperform(form) {
       extendFieldset = extend_fieldset;
     }
   }
+
   if (novalidateOnElements === undefined) {
     if (novalidate_on_elements === undefined) {
       novalidateOnElements = !strict;
@@ -2644,6 +3158,7 @@ function hyperform(form) {
       novalidateOnElements = novalidate_on_elements;
     }
   }
+
   if (preventImplicitSubmit === undefined) {
     if (prevent_implicit_submit === undefined) {
       preventImplicitSubmit = false;
@@ -2652,10 +3167,12 @@ function hyperform(form) {
       preventImplicitSubmit = prevent_implicit_submit;
     }
   }
+
   if (revalidate === undefined) {
     /* other recognized values: 'oninput', 'onblur', 'onsubmit' and 'never' */
     revalidate = strict ? 'onsubmit' : 'hybrid';
   }
+
   if (validEvent === undefined) {
     if (valid_event === undefined) {
       validEvent = !strict;
@@ -2665,8 +3182,15 @@ function hyperform(form) {
     }
   }
 
-  var settings = { debug: debug, strict: strict, preventImplicitSubmit: preventImplicitSubmit, revalidate: revalidate,
-    validEvent: validEvent, extendFieldset: extendFieldset, classes: classes, novalidateOnElements: novalidateOnElements,
+  var settings = {
+    debug: debug,
+    strict: strict,
+    preventImplicitSubmit: preventImplicitSubmit,
+    revalidate: revalidate,
+    validEvent: validEvent,
+    extendFieldset: extendFieldset,
+    classes: classes,
+    novalidateOnElements: novalidateOnElements,
     validateNameless: validateNameless
   };
 
@@ -2680,65 +3204,100 @@ function hyperform(form) {
 }
 
 hyperform.version = version;
-
-hyperform.checkValidity = checkValidity;
+hyperform.checkValidity = polyfills_checkValidity;
 hyperform.reportValidity = reportValidity;
 hyperform.setCustomValidity = setCustomValidity;
 hyperform.stepDown = stepDown;
 hyperform.stepUp = stepUp;
 hyperform.validationMessage = validationMessage;
-hyperform.ValidityState = ValidityState;
+hyperform.ValidityState = validityState;
 hyperform.valueAsDate = valueAsDate;
 hyperform.valueAsNumber = valueAsNumber;
 hyperform.willValidate = willValidate;
 
 hyperform.setLanguage = function (lang) {
-  set_language(lang);return hyperform;
-};
-hyperform.addTranslation = function (lang, catalog) {
-  add_translation(lang, catalog);return hyperform;
-};
-hyperform.setRenderer = function (renderer, action) {
-  Renderer.set(renderer, action);return hyperform;
-};
-hyperform.addValidator = function (element, validator) {
-  custom_validator_registry.set(element, validator);return hyperform;
-};
-hyperform.setMessage = function (element, validator, message) {
-  custom_messages.set(element, validator, message);return hyperform;
-};
-hyperform.addHook = function (hook, action, position) {
-  add_hook(hook, action, position);return hyperform;
-};
-hyperform.removeHook = function (hook, action) {
-  remove_hook(hook, action);return hyperform;
+  set_language(lang);
+  return hyperform;
 };
 
-// TODO: Remove in next non-patch version
+hyperform.addTranslation = function (lang, catalog) {
+  add_translation(lang, catalog);
+  return hyperform;
+};
+
+hyperform.setRenderer = function (renderer, action) {
+  components_renderer.set(renderer, action);
+  return hyperform;
+};
+
+hyperform.addValidator = function (element, validator) {
+  components_registry.set(element, validator);
+  return hyperform;
+};
+
+hyperform.setMessage = function (element, validator, message) {
+  components_custom_messages.set(element, validator, message);
+  return hyperform;
+};
+
+hyperform.addHook = function (hook, action, position) {
+  add_hook(hook, action, position);
+  return hyperform;
+};
+
+hyperform.removeHook = function (hook, action) {
+  remove_hook(hook, action);
+  return hyperform;
+}; // TODO: Remove in next non-patch version
+
+
 hyperform.set_language = function (lang) {
-  w('set_language');set_language(lang);return hyperform;
+  w('set_language');
+  set_language(lang);
+  return hyperform;
 };
+
 hyperform.add_translation = function (lang, catalog) {
-  w('add_translation');add_translation(lang, catalog);return hyperform;
+  w('add_translation');
+  add_translation(lang, catalog);
+  return hyperform;
 };
+
 hyperform.set_renderer = function (renderer, action) {
-  w('set_renderer');Renderer.set(renderer, action);return hyperform;
+  w('set_renderer');
+  components_renderer.set(renderer, action);
+  return hyperform;
 };
+
 hyperform.add_validator = function (element, validator) {
-  w('add_validator');custom_validator_registry.set(element, validator);return hyperform;
+  w('add_validator');
+  components_registry.set(element, validator);
+  return hyperform;
 };
+
 hyperform.set_message = function (element, validator, message) {
-  w('set_message');custom_messages.set(element, validator, message);return hyperform;
+  w('set_message');
+  components_custom_messages.set(element, validator, message);
+  return hyperform;
 };
+
 hyperform.add_hook = function (hook, action, position) {
-  w('add_hook');add_hook(hook, action, position);return hyperform;
+  w('add_hook');
+  add_hook(hook, action, position);
+  return hyperform;
 };
+
 hyperform.remove_hook = function (hook, action) {
-  w('remove_hook');remove_hook(hook, action);return hyperform;
+  w('remove_hook');
+  remove_hook(hook, action);
+  return hyperform;
 };
 
 if (document.currentScript && document.currentScript.hasAttribute('data-hf-autoload')) {
   hyperform(window);
 }
 
-module.exports = hyperform;
+/* harmony default export */ var src_hyperform = __webpack_exports__["default"] = (hyperform);
+
+/***/ })
+/******/ ])["default"];

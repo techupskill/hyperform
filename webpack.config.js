@@ -1,18 +1,29 @@
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const module_type = process.env.MODULE_TYPE || 'window';
+
+let path_mod = '';
+switch (module_type) {
+  case 'amd':
+    path_mod = '.amd';
+    break;
+  case 'commonjs2':
+    path_mod = '.cjs';
+    break;
+}
+const entry = {};
+entry['hyperform'+path_mod] = './src/hyperform.js';
+entry['hyperform'+path_mod+'.min'] = './src/hyperform.js';
 
 module.exports = {
   mode: 'production',
-  entry: {
-    hyperform: './src/hyperform.js',
-    'hyperform.min': './src/hyperform.js',
-  },
+  entry,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     library: 'hyperform',
-    libraryTarget: 'window',
+    libraryTarget: module_type,
     libraryExport: 'default',
   },
   module: {

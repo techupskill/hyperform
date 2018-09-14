@@ -22,6 +22,16 @@ dist/hyperform.js: src/hyperform.js src/*.js src/*/*.js webpack.config.js
 	@mkdir -p dist
 	@$(WEBPACK)
 
+dist/hyperform.amd.js: src/hyperform.js src/*.js src/*/*.js webpack.config.js
+	@echo "* build $@"
+	@mkdir -p dist
+	@MODULE_TYPE=amd $(WEBPACK)
+
+dist/hyperform.cjs.js: src/hyperform.js src/*.js src/*/*.js webpack.config.js
+	@echo "* build $@"
+	@mkdir -p dist
+	@MODULE_TYPE=commonjs2 $(WEBPACK)
+
 test: test-syntax test-unit test-functional
 .PHONY: test
 
